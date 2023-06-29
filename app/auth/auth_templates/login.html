@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Log In Here!</h2>
+
+<div class="container justify-content-center">
+    <div class="row-2 justify-content-center">
+        <form  method="POST" class="col-12">
+            {{ form.hidden_tag() }}
+            
+
+            {{ form.username(class='form-control', placeholder="Username") }}
+            {{ form.password(class='form-control', placeholder="Password") }}
+            {{ form.submit(class='btn btn-danger', placeholder="LogIn") }}
+
+
+
+
+
+        </form>
+
+    </div>
+</div>
+
+
+
+{% endblock %}

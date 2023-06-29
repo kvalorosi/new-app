@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Type in your favorite pokemon name for more info.</h2>
+
+<div class="container justify-content-center">
+    <div class="row justify-content-center">
+        <form method="POST" class="col-10">
+            {{ form.hidden_tag() }}
+
+            {{ form.poke_name(class='form-control', placeholder="Pokemon Name") }}
+            {{ form.submit(class='btn btn-danger', placeholder="Submit") }}
+        </form>
+
+    </div>
+    </div>
+    <div class="row justify-content-center">
+        {% if poke %}
+        <div class="col-4">
+            <div class="card border-danger mb-3" style="width: 18rem;">
+                <img src="{{poke.sprite}}"
+                    class="card-img-top">
+                <div class="card-body text-danger">
+                    <p class="card-text">{{poke.name}}</p>
+                    <p class="card-text">ability: {{poke.ability}}</p>
+                    <p class="card-text">base exp: {{poke.base_exp}}</p>
+
+                </div>
+                <a href="/info/catch/{{poke.id}}" class="btn btn-danger">Catch Pokemon!</a>
+            </div>
+        </div>
+        {% endif %}
+
+        <!--name = db.Column(db.String, nullable=False)
+        base_exp = db.Column(db.Integer, nullable=False)
+        ability = db.Column(db.String, nullable=False)
+        sprite = db.Column(db.String)-->
+        {% if poke %}
+        <div class="card border-danger mb-3" style="width: 18rem;">
+            <img src="{{poke.sprite}}"
+              class="card-img-top">
+            <div class="card-body text-danger">
+              <p class="card-text">"{{poke.name}}"</p>
+              <p class="card-text">Caught: "{{poke.name}}"</p>
+              <a href="/info/released/{{poke.id}}" class="btn btn-danger">Release Pokemon!</a>
+            </div>
+           
+          </div>
+        {% endif %}
+        </div>
+      </div>
+    
+  
+  
+  
+  
+  
+  
+  
+  
+    </div> 
+
+</div>
+
+
+
+{% endblock %}
