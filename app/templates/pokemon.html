@@ -27,15 +27,15 @@
                     <p class="card-text">base exp: {{poke.base_exp}}</p>
 
                 </div>
+                <br>
                 <a href="/info/catch/{{poke.id}}" class="btn btn-danger">Catch Pokemon!</a>
+                <br>
+                <a href="battle" class="btn btn-danger">Click here to battle Pokemon!</a>
+                <br>
             </div>
         </div>
         {% endif %}
 
-        <!--name = db.Column(db.String, nullable=False)
-        base_exp = db.Column(db.Integer, nullable=False)
-        ability = db.Column(db.String, nullable=False)
-        sprite = db.Column(db.String)-->
         {% if poke %}
         <div class="card border-danger mb-3" style="width: 18rem;">
             <img src="{{poke.sprite}}"

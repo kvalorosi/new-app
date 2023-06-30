@@ -25,3 +25,6 @@ class CreateCardForm(FlaskForm):
     poke_info = StringField('poke_info')
     img_url = StringField('Image URL')
 
+class BattleForm(FlaskForm):
+    submit = SubmitField('Battle')
+

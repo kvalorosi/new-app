@@ -6,7 +6,7 @@ from urllib import response
 
 from flask import flash, redirect, render_template, request, url_for
 
-from app.auth.forms import CreateCardForm, PokeForm
+from app.auth.forms import BattleForm, CreateCardForm, PokeForm
 from .models import Pokemon, User
 
 
@@ -69,6 +69,11 @@ def my_poke(pokemon_id):
     pokemon = Pokemon.query.get(pokemon_id)
     pokes = current_user.caught
     print(pokes)
+    if len(pokes) >= 5: 
+        flash(f"Your team is full!", 'warning')
+        
+        return redirect(url_for('pokemon_data'))
+
     if pokemon in pokes:
         flash(f"You've already caught this Pokemon!", 'warning')
         
@@ -93,8 +98,48 @@ def noMore(pokemon_id):
 
     return redirect(url_for('pokemon_data'))
 
+
+@app.route('/battle_us/<int:pokemon_id1>/<int:pokemon_id2>/', methods=['GET', 'POST'])
+@login_required
+def battle_Us(pokemon_id1,pokemon_id2):
+    pokemon1 = Pokemon.query.get(pokemon_id1)
+    pokemon2 = Pokemon.query.get(pokemon_id2)
     
-   
+    if pokemon1.base_exp > pokemon2.base_exp:
+        winner = pokemon1
+        loser = pokemon2
+        flash('YOU WON!!')
+    else:
+        winner = pokemon2
+        loser = pokemon1
+        flash('YOU LOST!!')
+
+    winner.wins += 1
+    loser.losses += 1
+    return render_template('battle.html', winner=winner, loser=loser)
+
+
+@app.route('/battle/', methods=['GET', 'POST'])
+@login_required
+def battle():
+    users = User.query.all()
+    form = BattleForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user_id = form.user_id.data
+            user = User.query.get(current_user.id)
+            
+        flash('Battle complete!', 'success')
+        return redirect(url_for('battle'))
+    return render_template('battle.html', form=form, users=users)
+
     
+    
+
+    
+
+
+
 
 

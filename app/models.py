@@ -20,6 +20,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable=False, unique=True )
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
+    wins = db.Column(db.Integer)
+    losses = db.Column(db.Integer)
    
     def __init__(self, username, email, password):
         self.username = username
@@ -63,15 +65,11 @@ class Pokemon(db.Model):
         db.session.commit()
 
     def release_poke(self, user):
-        db.session.remove()
+        self.caught.remove(user)
         db.session.commit()
 
 
-# class Teams(db.Model):
-    #  caught_pokemon = db.Column(db.Integer, primary_key=True)
 
-    
-    
     
     
     

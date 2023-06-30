@@ -37,16 +37,14 @@ def login():
             user = User.query.filter_by(username=username).first()
             if user:
                 print(user.password)
-                # if check_password_hash(user.password, password):  SINCE WE HAVEN'T IMPLEMENTED THIS YET IT WAS PREVENTING LOGIN!
-                if user.password == password: #BASIC VERSION WORKS
-                    flash("You've logged in", 'success')
-                    login_user(user)
-                    return redirect(url_for('pokemon_data'))
-                else:
-                    flash('Wrong pass, try again', 'warning')
-                    
+                flash("You've logged in", 'success')
+                login_user(user)
+                return redirect(url_for('pokemon_data'))
             else:
-                flash('cannot find that user. . . ', 'danger')
+                flash('Wrong pass, try again', 'warning')
+                    
+        else:
+            flash('cannot find that user. . . ', 'danger')
     
     return render_template('login.html',form=form)
 

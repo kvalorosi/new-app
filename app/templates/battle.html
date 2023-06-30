@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<h2>Do you have what it takes to win a Poke Battle?!!</h2>
+
+    {% for user in users %}
+    <div class="container justify-content-center">
+        <div class="row justify-content-center">
+            <form method="POST" action="{{ url_for('battle',user_id=user.id) }}" class="col-10">
+                <input type="hidden" name="user_id" value="{{ user.id }}">
+                <button class="btn btn-danger">Battle with {{ user.username }}!!</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+   
+
+    
+
+
+
+
+{% endblock %}
