@@ -130,7 +130,7 @@ def battle():
             user_id = form.user_id.data
             user = User.query.get(current_user.id)
             
-        flash('Battle complete!', 'success')
+        
         return redirect(url_for('battle'))
     return render_template('battle.html', form=form, users=users)
 
