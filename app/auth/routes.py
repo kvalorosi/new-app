@@ -2,13 +2,13 @@
 from flask import Blueprint, flash, render_template, request, redirect, session, url_for
 from flask_login import current_user, login_user, logout_user
 from .forms import RegisterForm, LoginForm
-from ..models import User 
+from ..models import User, Bikes
 
 from werkzeug.security import check_password_hash
 
 
 
-auth = Blueprint('auth', __name__, template_folder='auth_templates')
+auth = Blueprint('auth', __name__, url_prefix='/auth', template_folder='auth_templates')
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
@@ -55,6 +55,14 @@ def logout():
     return redirect(url_for('land'))
 
 
+@auth.get('/bikes')
+def get_my_bikes():
+    bikes = Bikes.query.all()
+    bike_list = [b.to_dict() for b in bikes]
+    return {
+        'status' : 'ok',
+        'bikes' : bike_list
+    }
 
 
 

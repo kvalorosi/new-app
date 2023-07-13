@@ -108,14 +108,14 @@ def battle_Us(pokemon_id1,pokemon_id2):
     if pokemon1.base_exp > pokemon2.base_exp:
         winner = pokemon1
         loser = pokemon2
-        flash('YOU WON!!')
+        flash(f"YOU WON!!", 'sucess')
     else:
         winner = pokemon2
         loser = pokemon1
-        flash('YOU LOST!!')
+        flash(f"YOU LOST!!", 'warning')
 
-    winner.wins += 1
-    loser.losses += 1
+        winner.wins += 1
+        loser.losses += 1
     return render_template('battle.html', winner=winner, loser=loser)
 
 

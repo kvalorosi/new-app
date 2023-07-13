@@ -69,6 +69,26 @@ class Pokemon(db.Model):
         db.session.commit()
 
 
+class Bikes(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
+    pic = db.Column(db.String)
+
+
+    def __init__(self, name, pic):
+        self.name = name
+        self.pic = pic
+
+    def save_bikes(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def to_dict(self):
+        return{
+            'id': self.id,
+            'name': self.name,
+            'pic': self.pic
+        }
 
     
     
