@@ -90,7 +90,34 @@ class Bikes(db.Model):
             'pic': self.pic
         }
 
-    
+
+class Products(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    price = db.Column(db.Numeric(8,2))
+    description = db.Column(db.String)
+    image = db.Column(db.String)
+
+    def __init__(self, title, price, description, image):
+        self.title = title
+        self. price = price
+        self.description = description
+        self.image = image
+
+    def save_prod(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def to_dict(self):
+        return{
+            'id': self.id,
+            'title': self.title,
+            'price': self.price,
+            'description': self.description,
+            'image': self.image
+        }
+     
+
     
     
 

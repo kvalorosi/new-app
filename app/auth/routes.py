@@ -2,7 +2,7 @@
 from flask import Blueprint, flash, render_template, request, redirect, session, url_for
 from flask_login import current_user, login_user, logout_user
 from .forms import RegisterForm, LoginForm
-from ..models import User, Bikes
+from ..models import User, Bikes, Products
 
 from werkzeug.security import check_password_hash
 
@@ -64,6 +64,14 @@ def get_my_bikes():
         'bikes' : bike_list
     }
 
+@auth.get('/products')
+def get_products():
+    products = Products.query.all()
+    prod_list = [p.to_dict() for p in products]
+    return { 
+        'status': 'ok',
+        'products': prod_list
+    }
 
 
 
