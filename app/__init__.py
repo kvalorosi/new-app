@@ -31,7 +31,7 @@ login.init_app(app)
 
 login.login_view = 'auth.login'
 
-app.register_blueprint(auth)
+app.register_blueprint(auth, url_prefix='/auth')
 
 
 from . import routes

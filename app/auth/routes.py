@@ -1,6 +1,6 @@
 
-from flask import Blueprint, flash, render_template, request, redirect, session, url_for
-from flask_login import current_user, login_user, logout_user
+from flask import Blueprint, flash, render_template, request, session, redirect, url_for
+from flask_login import login_user, logout_user
 from .forms import RegisterForm, LoginForm
 from ..models import User, Bikes, Products
 
@@ -32,7 +32,7 @@ def login():
     if request.method == 'POST':
         if form.validate():
             username = form.username.data
-            password = form.password.data
+            password= form.password.data
 
             user = User.query.filter_by(username=username).first()
             if user:
